@@ -43,6 +43,10 @@ class Operator {
 		this.expressionCreator = expressionCreator;
 	}
 
+    boolean represents(String token) {
+        return representation.equals(token);
+    }
+
 	String representation() {
 		return representation;
 	}
@@ -51,9 +55,13 @@ class Operator {
 		return this.precedence < operator.precedence;
 	}
 
-	boolean represents(String token) {
-		return representation.equals(token);
-	}
+    boolean hasSamePrecedenceAs(Operator operator) {
+        return this.precedence == operator.precedence;
+    }
+
+    boolean isLeftAssociative() {
+        return Left == associativity;
+    }
 
 	ParseStatus createAndAddExpressionTo(Stack<Position<Expression>> expressions, int position) {
 		if (expressions.size() < arity) {
@@ -61,14 +69,6 @@ class Operator {
 			return ParseStatus.Create(position, representation, message);
 		}
 		return expressionCreator.createExpressionAndAddTo(expressions, position);
-	}
-
-	boolean hasSamePrecedenceAs(Operator operator) {
-		return this.precedence == operator.precedence;
-	}
-
-	boolean isLeftAssociative() {
-		return Left == associativity;
 	}
 
 	private String createMissingOperandMessage(int position, Stack<Position<Expression>> expressions) {
