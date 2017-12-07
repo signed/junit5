@@ -11,7 +11,6 @@
 package org.junit.platform.launcher.tagexpression;
 
 import static org.junit.platform.launcher.tagexpression.Associativity.Left;
-import static org.junit.platform.launcher.tagexpression.ParseStatus.missingOperatorBetween;
 import static org.junit.platform.launcher.tagexpression.ParseStatus.missingRhsOperand;
 
 import java.util.function.BiFunction;
@@ -49,7 +48,7 @@ class Operator {
                 return missingRhsOperand(representation, position);
             }
             if (position < lhs.position) {
-                return missingOperatorBetween(lhs.position, lhs.element.toString(), rhs.position, rhs.element.toString());
+                return ParseStatus.missingOperatorBetween(rhs, lhs);
             }
             return ParseStatus.problemParsing(position, representation);
         });

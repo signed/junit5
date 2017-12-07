@@ -51,7 +51,7 @@ public class TagExpressionFilter {
 	public static PostDiscoveryFilter includeMatching(String infixTagExpression) {
 		Expression expression = Parser.parseExpressionFrom(infixTagExpression).expressionOrThrow(
 			(message) -> new PreconditionViolationException(
-				"Unable to parse tag expression [" + infixTagExpression + "]"));
+				"Unable to parse tag expression [" + infixTagExpression + "]: " + message));
 		logger.config(() -> "parsed tag expression: " + expression);
 		return descriptor -> FilterResult.includedIf(expression.evaluate(descriptor.getTags()));
 	}
