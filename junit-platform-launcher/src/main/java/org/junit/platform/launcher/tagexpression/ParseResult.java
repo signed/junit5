@@ -10,17 +10,26 @@
 
 package org.junit.platform.launcher.tagexpression;
 
-import java.util.Optional;
+import static org.apiguardian.api.API.Status.INTERNAL;
+
 import java.util.function.Function;
 
-public class ParseResult {
+import org.apiguardian.api.API;
 
-	static ParseResult error(String errorMessage) {
-		return new ParseResult(null, errorMessage);
-	}
+/**
+ * Either contains a successfully parsed {@link Expression} or an <em>error message</em> describing the parse error.
+ *
+ * @since 1.1
+ */
+@API(status = INTERNAL, since = "1.1")
+public class ParseResult {
 
 	static ParseResult success(Expression expression) {
 		return new ParseResult(expression, null);
+	}
+
+	static ParseResult error(String errorMessage) {
+		return new ParseResult(null, errorMessage);
 	}
 
 	private final String errorMessage;
@@ -29,10 +38,6 @@ public class ParseResult {
 	private ParseResult(Expression expression, String errorMessage) {
 		this.errorMessage = errorMessage;
 		this.expression = expression;
-	}
-
-	public Optional<String> parseError() {
-		return Optional.ofNullable(errorMessage);
 	}
 
 	public Expression expressionOrThrow(Function<String, RuntimeException> error) {
