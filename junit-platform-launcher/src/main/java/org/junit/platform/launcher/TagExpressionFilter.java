@@ -25,7 +25,7 @@ import org.junit.platform.launcher.tagexpression.Parser;
  * Factory method for creating {@link PostDiscoveryFilter PostDiscoveryFilter}
  * based on a <em>tag expression</em>.
  *
- * @since 1.0
+ * @since 1.1
  * @see #includeMatching(String)
  */
 @API(status = EXPERIMENTAL, since = "1.1")
@@ -45,8 +45,7 @@ public class TagExpressionFilter {
 	 * <p>Containers and tests will only be executed if their tags match the supplied <em>infixTagExpression</em>.
 	 *
 	 * @param infixTagExpression to parse and evaluate against a {@link TestDescriptor}; never {@code null} or empty
-	 * @throws PreconditionViolationException if the supplied infixTagExpression
-	 * can not be parsed.
+	 * @throws PreconditionViolationException if the supplied infixTagExpression can not be parsed.
 	 */
 	public static PostDiscoveryFilter includeMatching(String infixTagExpression) {
 		Expression expression = Parser.parseExpressionFrom(infixTagExpression).expressionOrThrow(
