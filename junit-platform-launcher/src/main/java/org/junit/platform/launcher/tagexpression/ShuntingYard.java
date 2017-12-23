@@ -43,7 +43,7 @@ class ShuntingYard {
                 .process(this::ensureOnlySingleExpressionRemains);
         // @formatter:on
 		if (parseStatus.isError()) {
-			return ParseResult.error(parseStatus.message);
+			return ParseResult.error(parseStatus.errorMessage);
 		}
 		return ParseResult.success(expressions.pop().element);
 	}

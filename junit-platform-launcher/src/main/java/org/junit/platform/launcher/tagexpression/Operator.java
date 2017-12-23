@@ -31,7 +31,7 @@ class Operator {
 				expressions.push(new Position<>(position, not));
 				return ParseStatus.success();
 			}
-			return missingRhsOperand(representation, position);
+			return missingRhsOperand(position, representation);
 		});
 	}
 
@@ -45,7 +45,7 @@ class Operator {
 				return ParseStatus.success();
 			}
 			if (position > rhs.position) {
-				return missingRhsOperand(representation, position);
+				return missingRhsOperand(position, representation);
 			}
 			if (position < lhs.position) {
 				return ParseStatus.missingOperatorBetween(rhs, lhs);
@@ -92,7 +92,7 @@ class Operator {
 	ParseStatus createAndAddExpressionTo(Stack<Position<Expression>> expressions, int position) {
 		if (expressions.size() < arity) {
 			String message = createMissingOperandMessage(position, expressions);
-			return ParseStatus.Create(position, representation, message);
+			return ParseStatus.errorAt(position, representation, message);
 		}
 		return expressionCreator.createExpressionAndAddTo(expressions, position);
 	}
