@@ -10,25 +10,9 @@
 
 package org.junit.platform.launcher.tagexpression;
 
-import static org.apiguardian.api.API.Status.INTERNAL;
-
 import java.util.List;
 
-import org.apiguardian.api.API;
-import org.junit.platform.launcher.PostDiscoveryFilter;
-
-/**
- * Factory method for creating {@link PostDiscoveryFilter PostDiscoveryFilter}
- * based on a <em>tag expression</em>.
- *
- * @since 1.1
- */
-@API(status = INTERNAL, since = "1.1")
-public class Parser {
-
-	public static ParseResult parseExpressionFrom(String infixTagExpression) {
-		return new Parser().parse(infixTagExpression);
-	}
+class Parser {
 
 	private final Tokenizer tokenizer = new Tokenizer();
 
