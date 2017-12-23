@@ -23,7 +23,7 @@ class TagExpressionFilterTests {
 		String brokenTagExpression = "tag & ";
 		RuntimeException expected = assertThrows(PreconditionViolationException.class,
 			() -> TagExpressionFilter.includeMatching(brokenTagExpression));
-		assertThat(expected).hasMessage("Unable to parse tag expression [" + brokenTagExpression + "]");
+		assertThat(expected).hasMessageStartingWith("Unable to parse tag expression [" + brokenTagExpression + "]");
 	}
 
 }
