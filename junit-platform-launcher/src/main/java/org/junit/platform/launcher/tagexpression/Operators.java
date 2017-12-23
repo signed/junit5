@@ -10,13 +10,13 @@
 
 package org.junit.platform.launcher.tagexpression;
 
-import java.util.Map;
-import java.util.stream.Stream;
-
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toMap;
 import static org.junit.platform.launcher.tagexpression.Associativity.Left;
 import static org.junit.platform.launcher.tagexpression.Associativity.Right;
+
+import java.util.Map;
+import java.util.stream.Stream;
 
 class Operators {
 

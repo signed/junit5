@@ -10,12 +10,12 @@
 
 package org.junit.platform.launcher.tagexpression;
 
-import org.apiguardian.api.API;
-import org.junit.platform.launcher.PostDiscoveryFilter;
+import static org.apiguardian.api.API.Status.INTERNAL;
 
 import java.util.List;
 
-import static org.apiguardian.api.API.Status.INTERNAL;
+import org.apiguardian.api.API;
+import org.junit.platform.launcher.PostDiscoveryFilter;
 
 /**
  * Factory method for creating {@link PostDiscoveryFilter PostDiscoveryFilter}

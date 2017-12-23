@@ -37,7 +37,7 @@ class ShuntingYard {
 	}
 
 	public ParseResult execute() {
-        // @formatter:off
+		// @formatter:off
 		ParseStatus parseStatus = processTokens()
                 .process(this::consumeRemainingOperators)
                 .process(this::ensureOnlySingleExpressionRemains);
