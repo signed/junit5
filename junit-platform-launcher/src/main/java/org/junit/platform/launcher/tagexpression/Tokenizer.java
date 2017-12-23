@@ -10,11 +10,11 @@
 
 package org.junit.platform.launcher.tagexpression;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static java.util.Arrays.stream;
 import static java.util.Collections.emptyList;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 class Tokenizer {
 
