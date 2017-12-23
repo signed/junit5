@@ -10,19 +10,20 @@
 
 package org.junit.platform.launcher.tagexpression;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+import static java.util.Collections.emptyList;
 
 class Tokenizer {
 
 	List<String> tokenize(String infixTagExpression) {
 		if (null == infixTagExpression) {
-			return Collections.emptyList();
+			return emptyList();
 		}
 		String[] parts = infixTagExpression.replaceAll("([()!|&])", " $1 ").split("\\s");
-		return Arrays.stream(parts).filter(part -> !part.isEmpty()).collect(Collectors.toList());
+		return stream(parts).filter(part -> !part.isEmpty()).collect(Collectors.toList());
 	}
 
 }
