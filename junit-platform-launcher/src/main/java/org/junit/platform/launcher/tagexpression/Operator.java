@@ -11,7 +11,10 @@
 package org.junit.platform.launcher.tagexpression;
 
 import static org.junit.platform.launcher.tagexpression.Associativity.Left;
+import static org.junit.platform.launcher.tagexpression.ParseStatus.missingOperatorBetween;
 import static org.junit.platform.launcher.tagexpression.ParseStatus.missingRhsOperand;
+import static org.junit.platform.launcher.tagexpression.ParseStatus.problemParsing;
+import static org.junit.platform.launcher.tagexpression.ParseStatus.success;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -19,7 +22,7 @@ import java.util.function.Function;
 class Operator {
 
 	static Operator nullaryOperator(String representation, int precedence) {
-		return new Operator(representation, precedence, 0, null, (expressions, position) -> ParseStatus.success());
+		return new Operator(representation, precedence, 0, null, (expressions, position) -> success());
 	}
 
 	static Operator unaryOperator(String representation, int precedence, Associativity associativity,
@@ -29,7 +32,7 @@ class Operator {
 			if (position < rhs.position) {
 				Expression not = unaryExpression.apply(rhs.element);
 				expressions.push(new Position<>(position, not));
-				return ParseStatus.success();
+				return success();
 			}
 			return missingRhsOperand(position, representation);
 		});
@@ -42,15 +45,15 @@ class Operator {
 			Position<Expression> lhs = expressions.pop();
 			if (lhs.position < position && position < rhs.position) {
 				expressions.push(new Position<>(position, binaryExpression.apply(lhs.element, rhs.element)));
-				return ParseStatus.success();
+				return success();
 			}
 			if (position > rhs.position) {
 				return missingRhsOperand(position, representation);
 			}
 			if (position < lhs.position) {
-				return ParseStatus.missingOperatorBetween(lhs, rhs);
+				return missingOperatorBetween(lhs, rhs);
 			}
-			return ParseStatus.problemParsing(position, representation);
+			return problemParsing(position, representation);
 		});
 	}
 
