@@ -488,10 +488,10 @@ the dependencies of the `maven-surefire-plugin` similar to the following.
 [[running-tests-build-maven-filter-tags]]
 ===== Filtering by Tags
 
-You can filter tests by tags using the following configuration properties.
+You can filter tests by _<<tag-expression>>_ using the following configuration properties.
 
-- to include a tag, use either `groups` or `includeTags`
-- to exclude a tag, use either `excludedGroups` or `excludeTags`
+- to specify an include tag expression, use either `groups` or `includeTags`
+- to specify an exclude tag expression, use either `excludedGroups` or `excludeTags`
 
 [source,xml,indent=0]
 ----
@@ -504,8 +504,8 @@ You can filter tests by tags using the following configuration properties.
 				<version>2.19</version>
 				<configuration>
 			        <properties>
-						<includeTags>acceptance</includeTags>
-			            <excludeTags>integration, regression</excludeTags>
+						<includeTags>fast & smoke</includeTags>
+			            <excludeTags>slow, ci</excludeTags>
 			        </properties>
 			    </configuration>
 				<dependencies>
