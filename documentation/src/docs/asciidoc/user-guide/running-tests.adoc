@@ -209,13 +209,13 @@ junitPlatform {
 			include 'junit-jupiter'
 			// exclude 'junit-vintage'
 		}
-		tags {
-			include 'fast', 'smoke'
-			// exclude 'slow', 'ci'
-		}
 		packages {
 			include 'com.sample.included1', 'com.sample.included2'
 			// exclude 'com.sample.excluded1', 'com.sample.excluded2'
+		}
+		tags {
+			include 'fast', 'smoke'
+			// exclude 'slow', 'ci'
 		}
 		includeClassNamePattern '.*Spec'
 		includeClassNamePatterns '.*Test', '.*Tests'
@@ -225,11 +225,12 @@ junitPlatform {
 ----
 
 If you supply a _Test Engine ID_ via `engines {include ...}` or `engines {exclude ...}`,
-the JUnit Gradle plugin will only run tests for the desired test engines. Similarly, if
-you supply a _tag_ via `tags {include ...}` or `tags {exclude ...}`, the JUnit Gradle
-plugin will only run tests that are _tagged_ accordingly (e.g., via the `@Tag` annotation
-for JUnit Jupiter based tests). The same applies to package names that can be included or
-excluded using `packages {include ...}` or `packages {exclude ...}`.
+the JUnit Gradle plugin will only run tests for the desired test engines. The same
+applies to package names that can be included or excluded using `packages
+{include ...}` or `packages {exclude ...}`. Similarly, if you supply a
+_<<tag-expression>>_ via `tags {include ...}` or `tags {exclude ...}`, the JUnit Gradle
+plugin will only run tests that are _tagged_ with tags matching _the expression_
+(e.g., via the `@Tag` annotation for JUnit Jupiter based tests).
 
 [[running-tests-build-gradle-config-params]]
 ===== Configuration Parameters
